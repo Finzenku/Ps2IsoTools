@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+	<AssemblyVersion>1.0.1</AssemblyVersion>
+	<VersionPrefix>$(AssemblyVersion)</VersionPrefix>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
@@ -13,10 +15,17 @@
 	<PackageTags>ISO;UDF;PS2</PackageTags>
 	<RepositoryUrl>https://github.com/Finzenku/Ps2IsoTools</RepositoryUrl>
 	<Description>Tools to Read, Build, and Edit PS2 ISOs that use the UDF file system.</Description>
+	<PackageIcon>ps2.png</PackageIcon>
+	<PackageReleaseNotes>Added description and icon</PackageReleaseNotes>
+	<RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="C:\Users\Katherine\Pictures\ps2.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
