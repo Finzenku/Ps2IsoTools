@@ -11,6 +11,7 @@
 	<Copyright>MIT</Copyright>
 	<PackageReadmeFile>README.md</PackageReadmeFile>
 	<PackageTags>ISO;UDF;PS2</PackageTags>
+	<RepositoryUrl>https://github.com/Finzenku/Ps2IsoTools</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
