@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <ImplicitUsings>enable</ImplicitUsings>
@@ -12,10 +12,11 @@
 	<PackageReadmeFile>README.md</PackageReadmeFile>
 	<PackageTags>ISO;UDF;PS2</PackageTags>
 	<RepositoryUrl>https://github.com/Finzenku/Ps2IsoTools</RepositoryUrl>
+	<Description>Tools to Read, Build, and Edit PS2 ISOs that use the UDF file system.</Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Update="README.md">
+    <None Include="..\README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
