@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>PS2 ISO Tools</Title>
+    <Authors>Vi Ness</Authors>
+	<PackageLicenseExpression>MIT</PackageLicenseExpression>
+	<TargetFramework>net6.0</TargetFramework>
+	<Copyright>MIT</Copyright>
+	<PackageReadmeFile>README.md</PackageReadmeFile>
+	<PackageTags>ISO;UDF;PS2</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>
