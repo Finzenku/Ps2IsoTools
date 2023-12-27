@@ -1,5 +1,6 @@
-﻿using Ps2IsoTools.DiscUtils.Utils;
-using System.Text;
+﻿using System.Text;
+using Ps2IsoTools.DiscUtils.Utils;
+using Ps2IsoTools.Extensions;
 
 namespace Ps2IsoTools.UDF.EntityIdentifiers
 {
@@ -13,8 +14,8 @@ namespace Ps2IsoTools.UDF.EntityIdentifiers
         public int ReadFrom(byte[] buffer, int offset)
         {
             Flags = buffer[offset];
-            Identifier = Encoding.ASCII.GetString(buffer[(offset + 1)..(offset + 24)]);
-            Suffix = buffer[(offset + 24)..(offset + 32)];
+            Identifier = Encoding.ASCII.GetString(buffer.Slice((offset + 1), (offset + 24)));
+            Suffix = buffer.Slice((offset + 24), (offset + 32));
 
             return Size;
         }

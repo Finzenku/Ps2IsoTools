@@ -1,4 +1,5 @@
 ﻿using Ps2IsoTools.DiscUtils.Utils;
+using Ps2IsoTools.Extensions;
 
 namespace Ps2IsoTools.UDF.Descriptors.FileStructure.ExtendedAttribute
 {
@@ -19,7 +20,7 @@ namespace Ps2IsoTools.UDF.Descriptors.FileStructure.ExtendedAttribute
             AttributeType = EndianUtilities.ToUInt32LittleEndian(buffer, offset);
             AttributeSubType = buffer[offset + 4];
             recordLength = EndianUtilities.ToUInt32LittleEndian(buffer, offset + 8);
-            AttributeData = buffer[(offset + 12)..(offset + (int)recordLength - 1)];
+            AttributeData = buffer.Slice((offset + 12), (offset + (int)recordLength - 1));
 
             return Size;
         }

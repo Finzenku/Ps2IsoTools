@@ -1,4 +1,5 @@
 ﻿using Ps2IsoTools.DiscUtils.Utils;
+using Ps2IsoTools.Extensions;
 using Ps2IsoTools.UDF.EntityIdentifiers;
 
 namespace Ps2IsoTools.UDF.Descriptors.FileStructure.ExtendedAttribute
@@ -49,14 +50,14 @@ namespace Ps2IsoTools.UDF.Descriptors.FileStructure.ExtendedAttribute
             HeaderDescriptor = EndianUtilities.ToStruct<ExtendedAttributeHeaderDescriptor>(buffer, offset);
             if (HeaderDescriptor.ImplementationAttributesLocation < Size)
             {
-                byte[] impData = buffer[(int)(offset + HeaderDescriptor.ImplementationAttributesLocation)..(int)(offset + HeaderDescriptor.ApplicationAttributesLocation)];
+                var impData = buffer.Slice((int)(offset + HeaderDescriptor.ImplementationAttributesLocation), (int)(offset + HeaderDescriptor.ApplicationAttributesLocation));
                 ImplementationAttributes = ReadExtendedAttributesList(impData, true);
             }
             else
                 ImplementationAttributes = new();
             if (HeaderDescriptor.ApplicationAttributesLocation < Size)
             {
-                byte[] appData = buffer[(int)(offset + HeaderDescriptor.ApplicationAttributesLocation)..(offset + Size - 1)];
+                var appData = buffer.Slice((int)(offset + HeaderDescriptor.ApplicationAttributesLocation), (offset + Size - 1));
                 ImplementationAttributes = ReadExtendedAttributesList(appData, false);
             }
             else

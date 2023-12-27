@@ -40,10 +40,10 @@ namespace Ps2IsoTools.ISO.Files
         public DirectoryEntry? GetEntryByName(string Name)
         {
             if (Name.Contains(";"))
-                Name = Name.Split(";")[0];
+                Name = Name.Split(';')[0];
             foreach (DirectoryEntry fi in Entries)
             {
-                if (string.Compare(Name, fi.Name.Split(";")[0], StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Compare(Name, fi.Name.Split(';')[0], StringComparison.OrdinalIgnoreCase) == 0)
                     return fi;
             }
             return null;

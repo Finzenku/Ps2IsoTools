@@ -7,8 +7,8 @@ using Ps2IsoTools.UDF.Descriptors.FileStructure;
 using Ps2IsoTools.UDF.Descriptors.VolumeStructure;
 using Ps2IsoTools.UDF.Files;
 using Ps2IsoTools.UDF.Partitions;
-using File = Ps2IsoTools.UDF.Files.File;
 using Directory = Ps2IsoTools.UDF.Files.Directory;
+using File = Ps2IsoTools.UDF.Files.File;
 
 namespace Ps2IsoTools.UDF
 {
@@ -157,7 +157,7 @@ namespace Ps2IsoTools.UDF
         private List<string> GetDirectoryNames(string dirName, Directory dir)
         {
             List<string> names = new();
-            foreach(FileIdentifier fi in dir.AllEntries)
+            foreach (FileIdentifier fi in dir.AllEntries)
             {
                 string n = $"{dirName}\\{fi.FileName}";
                 if (fi.IsDirectory)
@@ -165,13 +165,13 @@ namespace Ps2IsoTools.UDF
                 else
                     names.Add(n);
             }
-            return names;            
+            return names;
         }
 
         public bool CopyFile(FileIdentifier file, string filePath = "")
         {
             if (filePath == "")
-                filePath = file.FileName.Split(";")[0];
+                filePath = file.FileName.Split(';')[0];
             FileInfo fi = new FileInfo(filePath);
             Stream fileStream = GetFileStream(file);
             using (FileStream stream = fi.Create())
