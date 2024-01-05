@@ -20,8 +20,9 @@
 // DEALINGS IN THE SOFTWARE.
 //
 
-using Ps2IsoTools.DiscUtils.Utils;
 using System.Text;
+using Ps2IsoTools.DiscUtils.Utils;
+using Ps2IsoTools.Extensions;
 
 namespace Ps2IsoTools.ISO.VolumeDescriptors
 {
@@ -48,7 +49,7 @@ namespace Ps2IsoTools.ISO.VolumeDescriptors
         public BaseVolumeDescriptor(byte[] buffer, int offset)
         {
             VolumeDescriptorType = (VolumeDescriptorType)buffer[offset];
-            Identifier = Encoding.ASCII.GetString(buffer[(offset + 1)..(offset + 6)]);
+            Identifier = Encoding.ASCII.GetString(buffer.Slice((offset + 1), (offset + 6)));
             VolumeDescriptorVersion = buffer[offset + 6];
         }
         internal virtual void WriteTo(byte[] buffer, int offset)

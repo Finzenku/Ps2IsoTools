@@ -20,8 +20,8 @@
 // DEALINGS IN THE SOFTWARE.
 //
 
-using Ps2IsoTools.DiscUtils.Utils;
 using System.Globalization;
+using Ps2IsoTools.DiscUtils.Utils;
 
 namespace Ps2IsoTools.UDF.Descriptors
 {
@@ -33,7 +33,7 @@ namespace Ps2IsoTools.UDF.Descriptors
         {
             stream.Position = sector * (long)sectorSize;
             byte[] buffer = new byte[sectorSize];
-            stream.Read(buffer);
+            stream.Read(buffer, 0, buffer.Length);
             T result = EndianUtilities.ToStruct<T>(buffer, 0);
             if (result.Tag.TagIdentifier != result.RequiredTagIdentifier || result.Tag.TagLocation != sector)
             {

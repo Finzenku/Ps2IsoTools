@@ -1,4 +1,5 @@
 ﻿using Ps2IsoTools.DiscUtils.Utils;
+using Ps2IsoTools.Extensions;
 using Ps2IsoTools.UDF.Descriptors.FileStructure.ExtendedAttribute;
 using Ps2IsoTools.UDF.EntityIdentifiers;
 using Ps2IsoTools.UDF.Time;
@@ -47,8 +48,8 @@ namespace Ps2IsoTools.UDF.Descriptors.FileStructure
             Uid = uint.MaxValue;
             Gid = uint.MaxValue;
             Permissions = FilePermissions.OthersExecute | FilePermissions.OthersRead |
-                          FilePermissions.GroupExecute  | FilePermissions.GroupRead  |
-                          FilePermissions.OwnerExecute  | FilePermissions.OwnerRead;
+                          FilePermissions.GroupExecute | FilePermissions.GroupRead |
+                          FilePermissions.OwnerExecute | FilePermissions.OwnerRead;
             FileLinkCount = 1;
             RecordFormat = 0;
             RecordDisplayAttributes = 0;
@@ -81,14 +82,14 @@ namespace Ps2IsoTools.UDF.Descriptors.FileStructure
             Uid = uint.MaxValue;
             Gid = uint.MaxValue;
             Permissions = FilePermissions.OthersExecute | FilePermissions.OthersRead |
-                          FilePermissions.GroupExecute  | FilePermissions.GroupRead  |
-                          FilePermissions.OwnerExecute  | FilePermissions.OwnerRead;
+                          FilePermissions.GroupExecute | FilePermissions.GroupRead |
+                          FilePermissions.OwnerExecute | FilePermissions.OwnerRead;
             FileLinkCount = 1;
             RecordFormat = 0;
             RecordDisplayAttributes = 0;
             RecordLength = 0;
             InformationLength = allocationDescriptor.ExtentLength;
-            LogicalBlocksRecorded = (ulong)MathUtilities.RoundUp((int)InformationLength, IsoUtilities.SectorSize)/IsoUtilities.SectorSize;
+            LogicalBlocksRecorded = (ulong)MathUtilities.RoundUp((int)InformationLength, IsoUtilities.SectorSize) / IsoUtilities.SectorSize;
             DateTime utcNow = DateTime.UtcNow;
             AccessTime = TimeStamp.FromDateTime(utcNow);
             ModificationTime = TimeStamp.FromDateTime(utcNow);
@@ -129,8 +130,8 @@ namespace Ps2IsoTools.UDF.Descriptors.FileStructure
             LengthofAllocationDescriptors = EndianUtilities.ToUInt32LittleEndian(buffer, offset + 172);
             ExtendedAttributes = new((int)LengthofExtendedAttributes);
             ExtendedAttributes.ReadFrom(buffer, offset + 176);
-            //ExtendedAttributesList = ReadExtendedAttributes(buffer[(offset + 176)..(offset + 176 + (int)LengthofExtendedAttributes)]);
-            AllocationDescriptors = buffer[(offset + 176 + (int)LengthofExtendedAttributes)..(offset + 176 + (int)LengthofExtendedAttributes + (int)LengthofAllocationDescriptors)];
+            //ExtendedAttributesList = ReadExtendedAttributes(buffer.Slice((offset + 176), (offset + 176 + (int)LengthofExtendedAttributes)));
+            AllocationDescriptors = buffer.Slice((offset + 176 + (int)LengthofExtendedAttributes), (offset + 176 + (int)LengthofExtendedAttributes + (int)LengthofAllocationDescriptors));
 
             return Size;
         }

@@ -1,6 +1,7 @@
-﻿using Ps2IsoTools.DiscUtils.Utils;
+﻿using System.Text;
+using Ps2IsoTools.DiscUtils.Utils;
+using Ps2IsoTools.Extensions;
 using Ps2IsoTools.UDF.Strings;
-using System.Text;
 
 namespace Ps2IsoTools.UDF.Descriptors.FileStructure
 {
@@ -17,7 +18,7 @@ namespace Ps2IsoTools.UDF.Descriptors.FileStructure
 
         public override int Size => MathUtilities.RoundUp(38 + LengthofImplementationUse + LengthofFileIdentifier, 4);
 
-        public FileIdentifierDescriptor() : base(TagIdentifier.FileIdentifierDescriptor) 
+        public FileIdentifierDescriptor() : base(TagIdentifier.FileIdentifierDescriptor)
         {
             FileVersionNumber = 1;
         }
@@ -33,7 +34,7 @@ namespace Ps2IsoTools.UDF.Descriptors.FileStructure
 
             FileVersionNumber = 1;
             FileCharacteristics = fileType;
-            fileName = fileName.Split(";")[0];
+            fileName = fileName.Split(';')[0];
             FileIdentifier = new Dstring(fileName, CompressionID.UTF16);
             LengthofFileIdentifier = (byte)FileIdentifier.DataLength;
             InformationControlBlock = fileLocation;
@@ -52,7 +53,7 @@ namespace Ps2IsoTools.UDF.Descriptors.FileStructure
             LengthofFileIdentifier = buffer[offset + 19];
             InformationControlBlock = EndianUtilities.ToStruct<LongAllocationDescriptor>(buffer, offset + 20);
             LengthofImplementationUse = EndianUtilities.ToUInt16LittleEndian(buffer, offset + 36);
-            ImplementationUse = buffer[(offset + 38)..(offset + 38 + LengthofImplementationUse)];
+            ImplementationUse = buffer.Slice((offset + 38), (offset + 38 + LengthofImplementationUse));
             FileIdentifier = Dstring.FromBytes(buffer, offset + 38 + LengthofImplementationUse, LengthofFileIdentifier);
 
             return Size;
