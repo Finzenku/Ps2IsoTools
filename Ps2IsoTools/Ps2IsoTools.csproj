@@ -1,25 +1,25 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-	<AssemblyVersion>1.0.1</AssemblyVersion>
-	<VersionPrefix>$(AssemblyVersion)</VersionPrefix>
+    <AssemblyVersion>1.0.1</AssemblyVersion>
+    <VersionPrefix>$(AssemblyVersion)</VersionPrefix>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Title>PS2 ISO Tools</Title>
     <Authors>Vi Ness</Authors>
-	<PackageLicenseExpression>MIT</PackageLicenseExpression>
-	<TargetFramework>net6.0</TargetFramework>
-	<Copyright>MIT</Copyright>
-	<PackageReadmeFile>README.md</PackageReadmeFile>
-	<PackageTags>ISO;UDF;PS2</PackageTags>
-	<RepositoryUrl>https://github.com/Finzenku/Ps2IsoTools</RepositoryUrl>
-	<Description>Tools to Read, Build, and Edit PS2 ISOs that use the UDF file system.</Description>
-	<PackageIcon>ps2.png</PackageIcon>
-	<PackageReleaseNotes>Added description and icon</PackageReleaseNotes>
-	<RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>10.0</LangVersion>
+    <Copyright>MIT</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>ISO;UDF;PS2</PackageTags>
+    <RepositoryUrl>https://github.com/Finzenku/Ps2IsoTools</RepositoryUrl>
+    <Description>Tools to Read, Build, and Edit PS2 ISOs that use the UDF file system.</Description>
+    <PackageIcon>ps2.png</PackageIcon>
+    <PackageReleaseNotes>Added description and icon</PackageReleaseNotes>
+    <RepositoryType>git</RepositoryType>
+    <NoWarn>114;169;649;8600;8601;8603;8604;8618;8625</NoWarn>
   </PropertyGroup>
-
   <ItemGroup>
     <None Include="..\README.md">
       <Pack>True</Pack>
@@ -30,5 +30,4 @@
       <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
-
 </Project>

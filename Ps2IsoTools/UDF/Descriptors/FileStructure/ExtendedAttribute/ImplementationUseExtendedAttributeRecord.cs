@@ -1,4 +1,5 @@
 ﻿using Ps2IsoTools.DiscUtils.Utils;
+using Ps2IsoTools.Extensions;
 using Ps2IsoTools.UDF.EntityIdentifiers;
 
 namespace Ps2IsoTools.UDF.Descriptors.FileStructure.ExtendedAttribute
@@ -28,7 +29,7 @@ namespace Ps2IsoTools.UDF.Descriptors.FileStructure.ExtendedAttribute
             iuSize = EndianUtilities.ToInt32LittleEndian(buffer, offset + 12);
 
             ImplementationIdentifier = EndianUtilities.ToStruct<ImplementationEntityIdentifier>(buffer, offset + 16);
-            ImplementationUseData = buffer[(offset + 48)..(offset + 48 + iuSize)];
+            ImplementationUseData = buffer.Slice((offset + 48), (offset + 48 + iuSize));
 
             return read;
         }

@@ -1,5 +1,6 @@
-﻿using Ps2IsoTools.DiscUtils.Utils;
-using System.Text;
+﻿using System.Text;
+using Ps2IsoTools.DiscUtils.Utils;
+using Ps2IsoTools.Extensions;
 
 namespace Ps2IsoTools.ISO.Files
 {
@@ -28,7 +29,7 @@ namespace Ps2IsoTools.ISO.Files
             }
             else
                 ParentIndex = EndianUtilities.ToInt16LittleEndian(buffer, offset + 6);
-            PathName = Encoding.Default.GetString(buffer[(offset + 8)..(offset + 8 + NameLength)]);
+            PathName = Encoding.Default.GetString(buffer.Slice((offset + 8), (offset + 8 + NameLength)));
 
             return Size;
         }

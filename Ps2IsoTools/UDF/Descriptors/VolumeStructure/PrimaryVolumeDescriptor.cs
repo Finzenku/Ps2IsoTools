@@ -1,4 +1,5 @@
 ﻿using Ps2IsoTools.DiscUtils.Utils;
+using Ps2IsoTools.Extensions;
 using Ps2IsoTools.UDF.CharacterSet;
 using Ps2IsoTools.UDF.EntityIdentifiers;
 using Ps2IsoTools.UDF.Strings;
@@ -38,7 +39,7 @@ namespace Ps2IsoTools.UDF.Descriptors
             {
                 TagIdentifier = TagIdentifier.PrimaryVolumeDescriptor,
                 DescriptorCRCLength = (ushort)(Size - 16),
-                TagLocation = sector,                
+                TagLocation = sector,
             };
             VolumeDescriptorSequenceNumber = descriptorSequenceNumber;
             PrimaryVolumeDescriptorNumber = 0;
@@ -82,7 +83,7 @@ namespace Ps2IsoTools.UDF.Descriptors
             ApplicationIdentifier = EndianUtilities.ToStruct<ApplicationEntityIdentifier>(buffer, offset + 344);
             RecordingTimeStamp = EndianUtilities.ToStruct<TimeStamp>(buffer, offset + 376);
             ImplementationIdentifier = EndianUtilities.ToStruct<ImplementationEntityIdentifier>(buffer, offset + 388);
-            ImplementationUse = buffer[(offset + 420)..(offset + 484)];
+            ImplementationUse = buffer.Slice((offset + 420), (offset + 484));
             PredecessorVolumeDescriptorSequenceLocation = EndianUtilities.ToUInt32LittleEndian(buffer, offset + 484);
             Flags = EndianUtilities.ToUInt16LittleEndian(buffer, offset + 488);
 

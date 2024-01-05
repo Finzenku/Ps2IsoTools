@@ -1,4 +1,5 @@
 ﻿using Ps2IsoTools.DiscUtils.Utils;
+using Ps2IsoTools.Extensions;
 using Ps2IsoTools.UDF.CharacterSet;
 using Ps2IsoTools.UDF.EntityIdentifiers;
 using Ps2IsoTools.UDF.Strings;
@@ -52,8 +53,8 @@ namespace Ps2IsoTools.UDF.Descriptors.FileStructure
             AbstractFileIdentifier = new Dstring(abstractFileIdentifier, CompressionID.UTF8, 32);
             RootDirectoryICB = rootDirectoryICB;
             DomainIdentifier = CommonIdentifiers.OSTAUDFCompliant;
-            NextExtent = nextFileSetDescriptor??new();
-            SystemStreamDirectoryICB = systemStreamDirectoryICB??new();
+            NextExtent = nextFileSetDescriptor ?? new();
+            SystemStreamDirectoryICB = systemStreamDirectoryICB ?? new();
 
             FixChecksums();
         }
@@ -77,7 +78,7 @@ namespace Ps2IsoTools.UDF.Descriptors.FileStructure
             DomainIdentifier = EndianUtilities.ToStruct<DomainEntityIdentifier>(buffer, offset + 416);
             NextExtent = EndianUtilities.ToStruct<LongAllocationDescriptor>(buffer, offset + 448);
             SystemStreamDirectoryICB = EndianUtilities.ToStruct<LongAllocationDescriptor>(buffer, offset + 464);
-            Reserved = buffer[(offset + 480)..(offset + 512)];
+            Reserved = buffer.Slice((offset + 480), (offset + 512));
 
             return Size;
         }

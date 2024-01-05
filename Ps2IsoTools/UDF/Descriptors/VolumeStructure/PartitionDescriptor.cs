@@ -1,4 +1,5 @@
 ﻿using Ps2IsoTools.DiscUtils.Utils;
+using Ps2IsoTools.Extensions;
 using Ps2IsoTools.UDF.EntityIdentifiers;
 
 namespace Ps2IsoTools.UDF.Descriptors.VolumeStructure
@@ -50,7 +51,7 @@ namespace Ps2IsoTools.UDF.Descriptors.VolumeStructure
             PartitionStartingLocation = EndianUtilities.ToUInt32LittleEndian(buffer, offset + 188);
             PartitionLength = EndianUtilities.ToUInt32LittleEndian(buffer, offset + 192);
             ImplementationIdentifier = EndianUtilities.ToStruct<ImplementationEntityIdentifier>(buffer, offset + 196);
-            ImplementationUse = buffer[(offset + 228)..(offset + 356)];
+            ImplementationUse = buffer.Slice((offset + 228), (offset + 356));
 
             return Size;
         }
@@ -99,7 +100,7 @@ namespace Ps2IsoTools.UDF.Descriptors.VolumeStructure
                 PartitionIntegrityTable = EndianUtilities.ToStruct<ShortAllocationDescriptor>(buffer, offset + 16);
                 FreedSpaceTable = EndianUtilities.ToStruct<ShortAllocationDescriptor>(buffer, offset + 24);
                 FreedSpaceBitmap = EndianUtilities.ToStruct<ShortAllocationDescriptor>(buffer, offset + 32);
-                Reserved = buffer[(offset + 40)..(offset + 128)];
+                Reserved = buffer.Slice((offset + 40), (offset + 128));
 
                 return Size;
             }
