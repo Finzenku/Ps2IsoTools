@@ -1,5 +1,4 @@
 ﻿using Ps2IsoTools.DiscUtils.Utils;
-using Ps2IsoTools.Extensions;
 using Ps2IsoTools.UDF.CharacterSet;
 using Ps2IsoTools.UDF.EntityIdentifiers;
 using Ps2IsoTools.UDF.Strings;
@@ -37,7 +36,7 @@ namespace Ps2IsoTools.UDF.Descriptors
             LVInfo2 = Dstring.FromBytes(buffer, offset + 228, 36);
             LVInfo3 = Dstring.FromBytes(buffer, offset + 264, 36);
             ImplementationID = EndianUtilities.ToStruct<ApplicationEntityIdentifier>(buffer, offset + 300);
-            ImplementationUse = buffer.Slice((offset + 332), (offset + 460));
+            ImplementationUse = buffer[(offset + 332)..(offset + 460)];
 
             return Size;
         }

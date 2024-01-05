@@ -17,10 +17,10 @@ namespace Ps2IsoTools.ISO
             byte[] buffer = new byte[SectorSize];
             ms = File.Open(filePath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite);
             ms.Position = 0x10 * SectorSize;
-            ms.Read(buffer, 0, buffer.Length);
+            ms.Read(buffer);
             PVD = new ISO.VolumeDescriptors.PrimaryVolumeDescriptor(buffer, 0);
             ms.Position = PVD.TypeLPathTableLocation * PVD.LogicalBlockSize;
-            ms.Read(buffer, 0, buffer.Length);
+            ms.Read(buffer);
             PathTable = new PathTable();
             PathTable.ReadFrom(buffer, 0);
 
@@ -29,7 +29,7 @@ namespace Ps2IsoTools.ISO
             foreach (PathTableEntry entry in PathTable.Entries)
             {
                 ms.Position = entry.DirectoryLocation * PVD.LogicalBlockSize;
-                ms.Read(buffer, 0, buffer.Length);
+                ms.Read(buffer);
                 Directory dir = new();
                 dir.ReadFrom(buffer, 0);
                 directories.Add(dir);
@@ -39,7 +39,7 @@ namespace Ps2IsoTools.ISO
         public bool CopyFile(DirectoryEntry file, string filePath = "")
         {
             if (filePath == "")
-                filePath = file.Name.Split(';')[0];
+                filePath = file.Name.Split(";")[0];
             FileInfo fi = new FileInfo(filePath);
             using (FileStream stream = fi.Create())
             {
@@ -91,7 +91,7 @@ namespace Ps2IsoTools.ISO
                 return GetFileLocationNoPath(path[0]);
 
             Directory? dir = directories[0];
-            DirectoryEntry? entry = null;
+            DirectoryEntry? entry = null; 
             for (int i = 0; i < path.Length; i++)
             {
                 entry = dir?.GetEntryByName(path[i]);
@@ -123,7 +123,7 @@ namespace Ps2IsoTools.ISO
 
         public Directory? GetDirectoryByIdentifier(DirectoryEntry fileIdentifier)
         {
-            foreach (Directory dir in directories)
+            foreach(Directory dir in directories)
             {
                 if (dir.Identifier.Equals(fileIdentifier))
                     return dir;

@@ -119,7 +119,7 @@ namespace Ps2IsoTools.UDF.Strings
             }
             data[0] = (byte)CompressionID;
             if (DataLength > MinLength)
-                data[data.Length - 1] = (byte)(MinLength);
+                data[^1] = (byte)(MinLength);
             return data;
         }
 
@@ -133,7 +133,7 @@ namespace Ps2IsoTools.UDF.Strings
         public static Dstring FromBytes(byte[] buffer, int offset, int count, bool padded = true)
         {
             if (padded)
-                return new Dstring(ReadDCharacters(buffer, offset, buffer[offset + count - 1]), (CompressionID)buffer[offset], count);
+                return new Dstring(ReadDCharacters(buffer, offset, buffer[offset + count -1]), (CompressionID)buffer[offset], count);
             else
                 return new Dstring(ReadDCharacters(buffer, offset, count), (CompressionID)buffer[offset]);
         }
