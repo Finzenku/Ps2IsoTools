@@ -1,33 +1,36 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-	<PropertyGroup>
-		<AssemblyVersion>1.1.0</AssemblyVersion>
-		<VersionPrefix>$(AssemblyVersion)</VersionPrefix>
-		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-		<Title>PS2 ISO Tools</Title>
-		<Authors>Vi Ness</Authors>
-		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<TargetFrameworks>netstandard2.0;netstandard2.1;netcoreapp3.0;netcoreapp3.1;net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
-		<LangVersion>10.0</LangVersion>
-		<Copyright>MIT</Copyright>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
-		<PackageTags>ISO;UDF;PS2</PackageTags>
-		<RepositoryUrl>https://github.com/Finzenku/Ps2IsoTools</RepositoryUrl>
-		<Description>Tools to Read, Build, and Edit PS2 ISOs that use the UDF file system.</Description>
-		<PackageIcon>ps2.png</PackageIcon>
-		<PackageReleaseNotes>Compatibility for more dotnet frameworks</PackageReleaseNotes>
-		<RepositoryType>git</RepositoryType>
-		<NoWarn>114;169;649;8600;8601;8603;8604;8618;8625</NoWarn>
-	</PropertyGroup>
-	<ItemGroup>
-		<None Include="..\README.md">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-		<None Include="E:\Users\Katherine\Pictures\ps2.png">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-	</ItemGroup>
+
+  <PropertyGroup>
+    <AssemblyVersion>1.1.0</AssemblyVersion>
+    <VersionPrefix>$(AssemblyVersion)</VersionPrefix>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Title>PS2 ISO Tools</Title>
+    <Authors>Vi Ness</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;netcoreapp3.0;netcoreapp3.1;net5.0;net6.0;net7.0;net8.0</TargetFrameworks>
+    <LangVersion>10.0</LangVersion>
+    <Copyright>MIT</Copyright>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageTags>ISO;UDF;PS2</PackageTags>
+    <RepositoryUrl>https://github.com/Finzenku/Ps2IsoTools</RepositoryUrl>
+    <Description>Tools to Read, Build, and Edit PS2 ISOs that use the UDF file system.</Description>
+    <PackageIcon>ps2.png</PackageIcon>
+    <PackageReleaseNotes>Compatibility for more dotnet frameworks</PackageReleaseNotes>
+    <RepositoryType>git</RepositoryType>
+    <NoWarn>114;169;649;8600;8601;8603;8604;8618;8625</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="E:\Users\Katherine\Pictures\ps2.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
 </Project>
