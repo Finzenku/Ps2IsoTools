@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
     <AssemblyVersion>1.1.0</AssemblyVersion>
     <VersionPrefix>$(AssemblyVersion)</VersionPrefix>
@@ -20,6 +21,7 @@
     <RepositoryType>git</RepositoryType>
     <NoWarn>114;169;649;8600;8601;8603;8604;8618;8625</NoWarn>
   </PropertyGroup>
+
   <ItemGroup>
     <None Include="..\README.md">
       <Pack>True</Pack>
@@ -30,4 +32,5 @@
       <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
+
 </Project>

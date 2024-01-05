@@ -1,6 +1,5 @@
-﻿using System.Text;
-using Ps2IsoTools.DiscUtils.Utils;
-using Ps2IsoTools.Extensions;
+﻿using Ps2IsoTools.DiscUtils.Utils;
+using System.Text;
 
 namespace Ps2IsoTools.ISO.Files
 {
@@ -39,7 +38,7 @@ namespace Ps2IsoTools.ISO.Files
             VolumeSequenceNumber = EndianUtilities.ToUInt16LittleEndian(buffer, offset + 28);
             //VolumeSequenceNumberBigEnd = EndianUtilities.ToUInt16BigEndian(buffer, offset + 30);
             NameLength = buffer[offset + 32];
-            Name = Encoding.Default.GetString(buffer.Slice((offset + 33), (offset + 33 + NameLength)));
+            Name = Encoding.Default.GetString(buffer[(offset + 33)..(offset + 33 + NameLength)]);
             SystemUseData = new byte[EntryLength - Size];
 
             return Size;

@@ -20,11 +20,10 @@
 // DEALINGS IN THE SOFTWARE.
 //
 
-using System.Text;
 using Ps2IsoTools.DiscUtils.Utils;
-using Ps2IsoTools.Extensions;
 using Ps2IsoTools.ISO.Builders;
 using Ps2IsoTools.ISO.Files;
+using System.Text;
 
 namespace Ps2IsoTools.ISO.VolumeDescriptors
 {
@@ -60,8 +59,8 @@ namespace Ps2IsoTools.ISO.VolumeDescriptors
             Encoding = enc;
             RootDirectory = new();
 
-            SystemIdentifier = enc.GetString(buffer.Slice((offset + 8), (offset + 40))).TrimEnd();
-            VolumeIdentifier = enc.GetString(buffer.Slice((offset + 40), (offset + 72))).TrimEnd();
+            SystemIdentifier = enc.GetString(buffer[(offset + 8)..(offset + 40)]).TrimEnd();
+            VolumeIdentifier = enc.GetString(buffer[(offset + 40)..(offset + 72)]).TrimEnd();
             //72 - 79 Unused
             VolumeSize = EndianUtilities.ToUInt32LittleEndian(buffer, offset + 80);
             //88 - 119 Unused
@@ -75,13 +74,13 @@ namespace Ps2IsoTools.ISO.VolumeDescriptors
             TypeMOptionalPathTableLocation = EndianUtilities.ToUInt32BigEndian(buffer, offset + 152);
             //RootDirectory.ReadFrom(buffer, offset + 156); //RootDirectory used to be a DirectoryEntry
             DirectoryRecord.ReadFrom(buffer, offset + 156, Encoding, out RootDirectory);
-            VolumeSetIdentifier = enc.GetString(buffer.Slice((offset + 190), (offset + 318))).TrimEnd();
-            PublisherIdentifier = enc.GetString(buffer.Slice((offset + 318), (offset + 446))).TrimEnd();
-            DataPreparerIdentifier = enc.GetString(buffer.Slice((offset + 446), (offset + 574))).TrimEnd();
-            ApplicationIdentifier = enc.GetString(buffer.Slice((offset + 574), (offset + 702))).TrimEnd();
-            CopyrightFileIdentifier = enc.GetString(buffer.Slice((offset + 702), (offset + 739))).TrimEnd();
-            AbstractFileIdentifier = enc.GetString(buffer.Slice((offset + 739), (offset + 776))).TrimEnd();
-            BibliographicFileIdentifier = enc.GetString(buffer.Slice((offset + 776), (offset + 813))).TrimEnd();
+            VolumeSetIdentifier = enc.GetString(buffer[(offset + 190)..(offset + 318)]).TrimEnd();
+            PublisherIdentifier = enc.GetString(buffer[(offset + 318)..(offset + 446)]).TrimEnd();
+            DataPreparerIdentifier = enc.GetString(buffer[(offset + 446)..(offset + 574)]).TrimEnd();
+            ApplicationIdentifier = enc.GetString(buffer[(offset + 574)..(offset + 702)]).TrimEnd();
+            CopyrightFileIdentifier = enc.GetString(buffer[(offset + 702)..(offset + 739)]).TrimEnd();
+            AbstractFileIdentifier = enc.GetString(buffer[(offset + 739)..(offset + 776)]).TrimEnd();
+            BibliographicFileIdentifier = enc.GetString(buffer[(offset + 776)..(offset + 813)]).TrimEnd();
             CreationDateAndTime = IsoUtilities.ToDateTimeFromVolumeDescriptorTime(buffer, offset + 813);
             ModificationDateAndTime = IsoUtilities.ToDateTimeFromVolumeDescriptorTime(buffer, offset + 830);
             ExpirationDateAndTime = IsoUtilities.ToDateTimeFromVolumeDescriptorTime(buffer, offset + 847);
