@@ -1,5 +1,4 @@
 ﻿using Ps2IsoTools.DiscUtils.Utils;
-using Ps2IsoTools.Extensions;
 using Ps2IsoTools.UDF.CharacterSet;
 using Ps2IsoTools.UDF.EntityIdentifiers;
 using Ps2IsoTools.UDF.PartitionMaps;
@@ -61,11 +60,11 @@ namespace Ps2IsoTools.UDF.Descriptors
             LogicalVolumeIdentifier = Dstring.FromBytes(buffer, offset + 84, 128);
             LogicalBlockSize = EndianUtilities.ToUInt32LittleEndian(buffer, offset + 212);
             DomainIdentifier = EndianUtilities.ToStruct<DomainEntityIdentifier>(buffer, offset + 216);
-            LogicalVolumeContentsUse = buffer.Slice((offset + 248), (offset + 264));
+            LogicalVolumeContentsUse = buffer[(offset + 248)..(offset + 264)];
             MapTableLength = EndianUtilities.ToUInt32LittleEndian(buffer, offset + 264);
             NumberofPartitionMaps = EndianUtilities.ToUInt32LittleEndian(buffer, offset + 268);
             ImplementationIdentifier = EndianUtilities.ToStruct<ImplementationEntityIdentifier>(buffer, offset + 272);
-            ImplementationUse = buffer.Slice((offset + 304), (offset + 432));
+            ImplementationUse = buffer[(offset + 304)..(offset + 432)];
             IntegritySequenceExtent = EndianUtilities.ToStruct<ExtentDescriptor>(buffer, offset + 432);
 
             int pmOffset = 0;
@@ -94,7 +93,7 @@ namespace Ps2IsoTools.UDF.Descriptors
             Array.Copy(ImplementationUse, 0, buffer, offset + 304, ImplementationUse.Length);
             IntegritySequenceExtent.WriteTo(buffer, offset + 432);
             int pmOffset = 0;
-            for (int i = 0; i < PartitionMaps.Length; i++)
+            for(int i = 0; i < PartitionMaps.Length; i++)
             {
                 PartitionMaps[i].WriteTo(buffer, offset + 440 + pmOffset);
                 pmOffset += PartitionMaps[i].Size;

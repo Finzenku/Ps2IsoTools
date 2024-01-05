@@ -1,6 +1,5 @@
-﻿using System.Text;
-using Ps2IsoTools.DiscUtils.Utils;
-using Ps2IsoTools.Extensions;
+﻿using Ps2IsoTools.DiscUtils.Utils;
+using System.Text;
 
 namespace Ps2IsoTools.UDF.CharacterSet
 {
@@ -21,7 +20,7 @@ namespace Ps2IsoTools.UDF.CharacterSet
         public int ReadFrom(byte[] buffer, int offset)
         {
             Type = (CharacterSetType)buffer[offset];
-            Information = buffer.Slice((offset + 1), (offset + 64));
+            Information = buffer[(offset + 1)..(offset + 64)];
 
             return Size;
         }

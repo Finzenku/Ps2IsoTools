@@ -1,5 +1,4 @@
 ﻿using Ps2IsoTools.DiscUtils.Utils;
-using Ps2IsoTools.Extensions;
 
 namespace Ps2IsoTools.UDF.Descriptors
 {
@@ -23,7 +22,7 @@ namespace Ps2IsoTools.UDF.Descriptors
         {
             ExtentLength = EndianUtilities.ToUInt32LittleEndian(buffer, offset);
             ExtentLocation = EndianUtilities.ToStruct<LogicalBlockAddress>(buffer, offset + 4);
-            ImplementationUse = buffer.Slice((offset + 10), (offset + 16));
+            ImplementationUse = buffer[(offset + 10)..(offset + 16)];
 
             return Size;
         }
