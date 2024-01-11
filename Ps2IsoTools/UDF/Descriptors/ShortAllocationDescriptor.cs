@@ -21,11 +21,11 @@ namespace Ps2IsoTools.UDF.Descriptors
 
         public int ReadFrom(byte[] buffer, int offset)
         {
-            uint len = EndianUtilities.ToUInt32LittleEndian(buffer, offset);
+            ExtentLength = EndianUtilities.ToUInt32LittleEndian(buffer, offset);
             ExtentLocation = EndianUtilities.ToUInt32LittleEndian(buffer, offset + 4);
 
-            ExtentLength = len & 0x3FFFFFFF;
-            Flags = (ShortAllocationFlags)((len >> 30) & 0x3);
+            // The PS2 doesn't seem to use this flag and instead uses the entire 4 bytes of the ExtentLength for the length to allow files larger than 1GB
+            Flags = ShortAllocationFlags.RecordedAndAllocated;
 
             return Size;
         }
