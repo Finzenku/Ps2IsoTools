@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <AssemblyVersion>1.1.0</AssemblyVersion>
+    <AssemblyVersion>1.1.1</AssemblyVersion>
     <VersionPrefix>$(AssemblyVersion)</VersionPrefix>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -17,7 +17,7 @@
     <RepositoryUrl>https://github.com/Finzenku/Ps2IsoTools</RepositoryUrl>
     <Description>Tools to Read, Build, and Edit PS2 ISOs that use the UDF file system.</Description>
     <PackageIcon>ps2.png</PackageIcon>
-    <PackageReleaseNotes>Compatibility for more dotnet frameworks</PackageReleaseNotes>
+    <PackageReleaseNotes>Fixed a bug that caused games with large files to throw an exception upon reading</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <NoWarn>114;169;649;8600;8601;8603;8604;8618;8625</NoWarn>
   </PropertyGroup>
