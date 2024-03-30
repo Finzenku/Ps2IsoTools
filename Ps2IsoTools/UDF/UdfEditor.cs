@@ -8,7 +8,6 @@ namespace Ps2IsoTools.UDF
         private UdfReader reader;
         private UdfBuilder builder;
         private Dictionary<FileIdentifier, RebuildFile> rebuildFiles;
-        private List<FileIdentifier> files;
 
         public UdfEditor(string inputFile, string copyTo = "")
         {
@@ -28,12 +27,10 @@ namespace Ps2IsoTools.UDF
             reader = new UdfReader(fileToRead);
             builder = new();
             rebuildFiles = new();
-            files = new();
 
             foreach (string fileName in reader.GetAllFileFullNames())
             {
                 FileIdentifier fi = reader.GetFileByName(fileName)!;
-                files.Add(fi);
                 rebuildFiles.Add(fi, new(fileName, reader.GetFileStream(fi)));
             }
         }
@@ -59,7 +56,7 @@ namespace Ps2IsoTools.UDF
             InitializeReader(outputFile);
         }
 
-        public FileIdentifier? GetFileByName(string fileName) => files.Where(fi => string.Compare(fi.FileName, fileName, StringComparison.OrdinalIgnoreCase) == 0).FirstOrDefault();
+        public FileIdentifier? GetFileByName(string fileName) => reader.GetFileByName(fileName);
         public Stream GetFileStream(FileIdentifier file) => reader.GetWritableFileStream(file);
 
         public void ReplaceFileStream(FileIdentifier fileIdentifier, Stream newSource, bool makeCopy = false)
