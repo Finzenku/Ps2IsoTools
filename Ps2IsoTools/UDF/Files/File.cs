@@ -147,25 +147,18 @@ namespace Ps2IsoTools.UDF.Files
             byte[] rootDirData = UdfUtilities.ReadExtent(context, icb);
             DescriptorTag rootDirTag = EndianUtilities.ToStruct<DescriptorTag>(rootDirData, 0);
 
-            if (rootDirTag.TagIdentifier == TagIdentifier.ExtendedFileEntry)
+            FileEntry fileEntry = rootDirTag.TagIdentifier switch
             {
-                ExtendedFileEntry fileEntry = EndianUtilities.ToStruct<ExtendedFileEntry>(rootDirData, 0);
-                if (fileEntry.InformationControlBlockTag.FileType == FileType.Directory)
-                {
-                    return new Directory(context, partition, fileEntry);
-                }
-                return new File(context, partition, fileEntry, (uint)partition.LogicalBlockSize);
-            }
-            if (rootDirTag.TagIdentifier == TagIdentifier.FileEntry)
+                TagIdentifier.ExtendedFileEntry => EndianUtilities.ToStruct<ExtendedFileEntry>(rootDirData, 0),
+                TagIdentifier.FileEntry => EndianUtilities.ToStruct<FileEntry>(rootDirData, 0),
+                _ => throw new NotImplementedException("Only ExtendedFileEntries implemented")
+            };
+
+            if (fileEntry.InformationControlBlockTag.FileType == FileType.Directory)
             {
-                FileEntry fileEntry = EndianUtilities.ToStruct<FileEntry>(rootDirData, 0);
-                if (fileEntry.InformationControlBlockTag.FileType == FileType.Directory)
-                {
-                    return new Directory(context, partition, fileEntry);
-                }
-                return new File(context, partition, fileEntry, (uint)partition.LogicalBlockSize);
+                return new Directory(context, partition, fileEntry);
             }
-            throw new NotImplementedException("Only ExtendedFileEntries implemented");
+            return new File(context, partition, fileEntry, (uint)partition.LogicalBlockSize);
         }
     }
 }
